@@ -104,7 +104,7 @@ export default function HeroHeader() {
         <img
           src="/profile.png"
           alt="Farbud"
-          className="w-52 md:w-80 md:h-80 sm:w-80 sm:h-80  object-cover rounded-full
+          className="w-52 md:w-80 md:h-80 sm:w-36 sm:h-36  object-cover rounded-full
           shadow-[0_0_50px_rgba(99,102,241,0.35)]
           transition-transform duration-500 hover:scale-105"
         />
