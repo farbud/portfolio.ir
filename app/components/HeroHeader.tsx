@@ -101,13 +101,25 @@ export default function HeroHeader() {
         </div>
 
         {/* Image */}
-        <img
-          src="/profile.png"
-          alt="Farbud"
-          className="w-52 md:w-80 md:h-80 sm:w-36 sm:h-36  object-cover rounded-full
+        <div className="md:hidden">
+          <img
+            src="/profile.png"
+            alt="Farbud"
+            className=" w-36 h-36  object-cover rounded-full
           shadow-[0_0_50px_rgba(99,102,241,0.35)]
           transition-transform duration-500 hover:scale-105"
-        />
+          />
+        </div>
+
+        <div className="hidden md:block">
+          <img
+            src="/profile.png"
+            alt="Farbud"
+            className="w-52 md:w-80 md:h-80   object-cover rounded-full
+          shadow-[0_0_50px_rgba(99,102,241,0.35)]
+          transition-transform duration-500 hover:scale-105"
+          />
+        </div>
       </div>
     </section>
   );
