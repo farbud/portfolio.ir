@@ -96,7 +96,7 @@ export default function AboutMe() {
     >
       {/* Real Particles */}
       <Starfield />
-      <div className="max-w-3xl space-y-6 text-right">
+      <div className="max-w-3xl md:flex-row md:px-24 md:justify-center md:flex space-y-6 text-right">
         {lines.map((text, i) => (
           <motion.p
             key={i}
