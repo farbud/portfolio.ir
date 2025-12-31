@@ -1,110 +1,107 @@
 "use client";
-
 import { useEffect, useRef } from "react";
 
-type Star = {
-  x: number;
-  y: number;
-  radius: number;
-  speed: number;
-  depth: number;
-};
-
-export default function Starfield() {
+export default function Starfield({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pointer = useRef({ x: 0, y: 0, active: false });
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d")!;
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    let pointerX = width / 2;
-    let pointerY = height / 2;
-    let scrollY = window.scrollY;
-
-    const stars: Star[] = Array.from({ length: 160 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      radius: Math.random() * 1.2 + 0.5,
-      speed: Math.random() * 0.3 + 0.05,
-      depth: Math.random() * 1.5 + 0.5,
-    }));
-
-    /* ---------- Events ---------- */
+    const stars = Array.from({ length: 160 }, () => {
+      const x = Math.random() * w;
+      const y = Math.random() * h;
+      return {
+        x,
+        y,
+        ox: x,
+        oy: y,
+        r: Math.random() * 1.6 + 0.4,
+        depth: Math.random(),
+        vx: 0,
+        vy: 0,
+      };
+    });
 
     const resize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
     };
 
-    const mouseMove = (e: MouseEvent) => {
-      pointerX = e.clientX;
-      pointerY = e.clientY;
+    const updatePointer = (x: number, y: number) => {
+      pointer.current.x = x;
+      pointer.current.y = y;
+      pointer.current.active = true;
     };
 
-    const deviceMove = (e: DeviceOrientationEvent) => {
-      if (e.gamma !== null && e.beta !== null) {
-        pointerX = width / 2 + e.gamma * 15;
-        pointerY = height / 2 + e.beta * 15;
-      }
-    };
-
-    const scroll = () => {
-      scrollY = window.scrollY;
-    };
+    const clearPointer = () => (pointer.current.active = false);
 
     window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", mouseMove);
-    window.addEventListener("deviceorientation", deviceMove);
-    window.addEventListener("scroll", scroll);
+    window.addEventListener("mousemove", (e) =>
+      updatePointer(e.clientX, e.clientY)
+    );
+    window.addEventListener("mouseleave", clearPointer);
+    window.addEventListener(
+      "touchmove",
+      (e) => updatePointer(e.touches[0].clientX, e.touches[0].clientY),
+      { passive: true }
+    );
+    window.addEventListener("touchend", clearPointer);
 
-    /* ---------- Animation ---------- */
+    let raf = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, w, h);
 
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
+      stars.forEach((s) => {
+        const dx = pointer.current.x - s.x;
+        const dy = pointer.current.y - s.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
 
-      stars.forEach((star) => {
-        const parallaxX = (pointerX - width / 2) * 0.02 * star.depth;
-        const parallaxY = (pointerY - height / 2) * 0.02 * star.depth;
+        const radius = active ? 140 : 90;
+        const force =
+          pointer.current.active && dist < radius
+            ? (1 - dist / radius) * (active ? 1.2 : 0.6)
+            : 0;
 
-        star.y += star.speed * star.depth + scrollY * 0.0005 * star.depth;
+        // Magnetic force
+        s.vx += (dx / dist) * force * s.depth;
+        s.vy += (dy / dist) * force * s.depth;
 
-        if (star.y > height) {
-          star.y = 0;
-          star.x = Math.random() * width;
-        }
+        // بازگشت نرم به جای اصلی
+        s.vx += (s.ox - s.x) * 0.002;
+        s.vy += (s.oy - s.y) * 0.002;
+
+        // اصطکاک
+        s.vx *= 0.92;
+        s.vy *= 0.92;
+
+        s.x += s.vx;
+        s.y += s.vy;
+
+        ctx.fillStyle = active
+          ? "rgba(190,210,255,0.95)"
+          : "rgba(200,200,255,0.65)";
 
         ctx.beginPath();
-        ctx.arc(
-          star.x + parallaxX,
-          star.y + parallaxY,
-          star.radius * star.depth,
-          0,
-          Math.PI * 2
-        );
-        ctx.fillStyle = `rgba(255,255,255,${0.35 + star.depth * 0.3})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      requestAnimationFrame(animate);
+      raf = requestAnimationFrame(draw);
     };
 
-    animate();
+    draw();
 
     return () => {
+      cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", mouseMove);
-      window.removeEventListener("deviceorientation", deviceMove);
-      window.removeEventListener("scroll", scroll);
     };
-  }, []);
+  }, [active]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-0 pointer-events-none"
-    />
-  );
+  return <canvas ref={canvasRef} className="fixed inset-0 -z-10" />;
 }

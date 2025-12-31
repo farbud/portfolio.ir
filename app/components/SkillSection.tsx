@@ -3,7 +3,7 @@
 
 import { motion } from "framer-motion";
 import Starfield from "./Starfield";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const skills = [
   { name: "JavaScript", glow: "from-cyan-400 to-yellow-500" },
@@ -29,6 +29,8 @@ export default function SkillSection() {
   const [text, setText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+  const startY = useRef<number | null>(null);
 
   // Typing Effect
   useEffect(() => {
@@ -70,11 +72,20 @@ export default function SkillSection() {
 
   return (
     <section
-      onClick={enableGyro}
-      className="relative h-screen overflow-hidden bg-black text-white"
+      onTouchStart={(e) => (startY.current = e.touches[0].clientY)}
+      onTouchEnd={(e) => {
+        if (startY.current === null) return;
+        const diff = startY.current - e.changedTouches[0].clientY;
+        if (diff > 60) setExpanded(true); // Swipe Up باز کردن
+        if (diff < -60) setExpanded(false); // Swipe Down بستن
+      }}
+      className="relative h-screen overflow-hidden w-full  rounded-3xl
+           bg-black/60 backdrop-blur-2xl
+          text-white transition-all duration-700 
+          "
     >
       {/* background glow */}
-      <Starfield />
+      <Starfield active={expanded} />
       <div className="max-w-5xl mx-auto">
         {/* title */}
 
