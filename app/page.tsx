@@ -1,9 +1,5 @@
-import HeroHeader from "./components/HeroHeader";
+import Scroll from "./components/Scroll";
 
 export default function Home() {
-  return (
-    <div>
-      <HeroHeader />
-    </div>
-  );
+  return <Scroll />;
 }
