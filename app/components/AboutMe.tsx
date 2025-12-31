@@ -92,11 +92,11 @@ export default function AboutMe() {
   return (
     <section
       onClick={enableGyro}
-      className="relative h-screen z-10 flex min-h-screen items-center justify-center px-6 overflow-hidden bg-black text-white"
+      className="relative h-screen sm:flex-row sm:px-24 sm:justify-center sm:flex  z-10 flex min-h-screen items-center justify-center px-6 overflow-hidden bg-black text-white"
     >
       {/* Real Particles */}
       <Starfield />
-      <div className="max-w-3xl md:flex-row md:px-24 md:justify-center md:flex space-y-6 text-right">
+      <div className="max-w-3xl  space-y-6 text-right">
         {lines.map((text, i) => (
           <motion.p
             key={i}
@@ -104,7 +104,7 @@ export default function AboutMe() {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15, duration: 0.8, ease: "easeOut" }}
-            className="text-lg md:flex-row md:px-24 md:justify-center md:flex leading-8 text-neutral-200"
+            className="text-lg leading-8 text-neutral-200"
           >
             {text}
           </motion.p>
