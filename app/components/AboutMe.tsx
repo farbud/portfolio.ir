@@ -104,7 +104,7 @@ export default function AboutMe() {
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15, duration: 0.8, ease: "easeOut" }}
-            className="text-lg leading-8 text-neutral-200"
+            className="text-lg md:flex-row md:px-24 md:justify-center md:flex leading-8 text-neutral-200"
           >
             {text}
           </motion.p>
