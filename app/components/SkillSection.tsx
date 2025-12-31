@@ -12,7 +12,6 @@ const skills = [
   { name: "TypeScript", glow: "from-blue-400 to-sky-500" },
   { name: "Tailwind CSS", glow: "from-teal-400 to-gray-800" },
   { name: "UI Motion", glow: "from-pink-400 to-rose-500" },
-  { name: "Performance", glow: "from-yellow-400 to-orange-500" },
 ];
 
 interface DeviceOrientationEventWithPermission extends DeviceOrientationEvent {
@@ -94,13 +93,13 @@ export default function SkillSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center text-3xl md:text-4xl font-bold mb-16"
+          className="text-center flex  justify-center mt-10 text-3xl md:text-4xl font-bold mb-16"
         >
           My <span className="text-purple-400">Skills</span>
         </motion.h2>
 
         {/* grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 px-10 md:grid-cols-3 gap-8">
           {skills.map((skill, i) => (
             <motion.div
               key={skill.name}
@@ -114,14 +113,14 @@ export default function SkillSection() {
               {/* glow */}
               <div
                 className={`
-                  absolute -inset-1 rounded-2xl blur opacity-40
+                  absolute px-10 -inset-1 rounded-2xl blur opacity-40
                   bg-linear-to-br ${skill.glow}
                   group-hover:opacity-80 transition
                 `}
               />
 
               {/* card */}
-              <div className="relative rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10 py-10 text-center font-medium">
+              <div className="relative px-10 rounded-2xl justify-center bg-black/40 backdrop-blur-xl border border-white/10 py-10 text-center font-medium">
                 {skill.name}
               </div>
             </motion.div>
