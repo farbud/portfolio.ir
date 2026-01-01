@@ -21,10 +21,7 @@ export default function Page() {
   return (
     <main ref={containerRef} className="relative h-[300vh] bg-black">
       {/* Section 1 */}
-      <motion.section
-        style={{ opacity: s1Opacity }}
-        className="h-screen sticky top-0"
-      >
+      <motion.section style={{ opacity: s1Opacity }} className="h-screen ">
         <HeroHeader />
       </motion.section>
 

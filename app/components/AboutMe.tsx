@@ -14,18 +14,12 @@ export default function AboutMe() {
       <section className="w-full flex justify-center px-4 py-16">
         <div
           onTouchStart={(e) => (startY.current = e.touches[0].clientY)}
-          onTouchEnd={(e) => {
-            if (startY.current === null) return;
-            const diff = startY.current - e.changedTouches[0].clientY;
-            if (diff > 60) setExpanded(true); // Swipe Up باز کردن
-            if (diff < -60) setExpanded(false); // Swipe Down بستن
-          }}
           className="relative w-full max-w-xl rounded-3xl
-          border border-white/10 bg-black/60 backdrop-blur-2xl
+          border border-white/10 bg-black/60 
           p-6 text-white transition-all duration-700 ease-out
           "
         >
-          <div className="overflow-y-auto pr-2 text-sm leading-7 scrollbar-thin scrollbar-thumb-white/30">
+          <div className="text-gray-50 overflow-y-auto text-right  text-sm leading-7 scrollbar-thin scrollbar-thumb-white/30">
             <p>
               سلام، امیدوارم حالتون خوب باشه.
               <br />
