@@ -16,7 +16,7 @@ export default function Page() {
 
   // هر سکشن 1/3 اسکرول
   const s1Opacity = useTransform(scrollYProgress, [0, 0.33], [1, 0]);
-  const s2Opacity = useTransform(scrollYProgress, [0.33, 0.66], [0, 1]);
+  const s2Opacity = useTransform(scrollYProgress, [0.22, 0.44], [0, 1]);
 
   return (
     <main ref={containerRef} className="relative h-[300vh] bg-black">
@@ -28,13 +28,13 @@ export default function Page() {
       {/* Section 2 */}
       <motion.section
         style={{ opacity: s2Opacity }}
-        className="h-screen sticky top-0"
+        className="h-screen sticky "
       >
         <AboutMe />
       </motion.section>
 
       {/* Section 3 */}
-      <motion.section className="h-screen ">
+      <motion.section className="h-screen sticky ">
         <SkillsSection />
       </motion.section>
     </main>

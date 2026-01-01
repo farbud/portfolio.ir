@@ -6,10 +6,10 @@ import Starfield from "./Starfield";
 import { useEffect, useRef, useState } from "react";
 
 const skills = [
-  { name: "JavaScript", glow: "from-cyan-400 to-yellow-500" },
+  { name: "JS", glow: "from-cyan-400 to-yellow-500" },
   { name: "React", glow: "from-cyan-400 to-blue-500" },
   { name: "Next.js", glow: "from-purple-400 to-indigo-500" },
-  { name: "TypeScript", glow: "from-blue-400 to-sky-500" },
+  { name: "TS", glow: "from-blue-400 to-sky-500" },
   { name: "Tailwind CSS", glow: "from-teal-400 to-gray-800" },
   { name: "UI Motion", glow: "from-pink-400 to-rose-500" },
 ];
@@ -93,7 +93,7 @@ export default function SkillSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center flex  justify-center mt-10 text-3xl md:text-4xl font-bold mb-16"
+          className="text-center flex mt-40  top-20 justify-center  text-3xl md:text-4xl font-bold mb-16"
         >
           My <span className="text-purple-400">Skills</span>
         </motion.h2>
@@ -120,7 +120,7 @@ export default function SkillSection() {
               />
 
               {/* card */}
-              <div className="relative px-10 rounded-2xl justify-center bg-black/40 backdrop-blur-xl border border-white/10 py-10 text-center font-medium">
+              <div className="relative px-10  rounded-2xl justify-center bg-black/40 backdrop-blur-xl border border-white/10 py-10 text-center font-medium">
                 {skill.name}
               </div>
             </motion.div>
