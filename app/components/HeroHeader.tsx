@@ -80,7 +80,7 @@ export default function HeroHeader() {
       <div className="absolute inset-0 galaxy-bg" />
 
       {/* Content */}
-      <div className="relative mb-10 bottom-16  z-10 flex py-40 flex-col-reverse md:flex-row items-center justify-center gap-10 px-6 md:px-24">
+      <div className="relative mb-15 bottom-20  z-10 flex py-40 flex-col-reverse md:flex-row items-center justify-center gap-10 px-6 md:px-24">
         {/* Text */}
         <div className="max-w-xl text-center md:text-left space-y-4">
           <h1 className="text-4xl md:text-6xl font-bold">فربد خورشیدی</h1>
