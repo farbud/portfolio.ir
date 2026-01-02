@@ -93,7 +93,7 @@ export default function SkillSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center flex mt-40  top-20 justify-center  text-3xl md:text-4xl font-bold mb-16"
+          className="text-center flex  justify-center  text-3xl md:text-4xl font-bold mb-16"
         >
           My <span className="text-purple-400">Skills</span>
         </motion.h2>

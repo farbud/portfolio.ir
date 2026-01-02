@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useRef, useState } from "react";
 
@@ -11,7 +12,7 @@ export default function AboutMe() {
     <>
       <Starfield active={expanded} />
 
-      <section className="w-full flex justify-center px-4 py-16">
+      <section className="w-full mt-10 flex justify-center px-4 py-16">
         <div
           onTouchStart={(e) => (startY.current = e.touches[0].clientY)}
           className="relative w-full max-w-xl rounded-3xl
