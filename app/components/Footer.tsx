@@ -28,7 +28,7 @@ export function Footer() {
             >
               Email
             </a>
-            <a href="https://t.me/farbud" className="hover:text-blue-500">
+            <a href="https://t.me/Feryyyys" className="hover:text-blue-500">
               Telegram
             </a>
           </div>
